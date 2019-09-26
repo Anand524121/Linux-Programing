@@ -1,0 +1,15 @@
+#include<stdio.h>
+#include<fcntl.h>
+#include<sys/stat.h>
+#include<time.h>
+int main(int argc,char *argv[])
+{
+char *at,*mt,*ct; struct stat buf; stat(argv[1],&buf);
+printf("the inode no is : %d\n",buf.st_ino); if(S_ISDIR(buf.st_mode))
+printf("it is a directory"); if(S_ISREG(buf.st_mode)) printf("it is regurlar file\n");
+printf("the no of links is %d\n",buf.st_nlink); at=ctime(&buf.st_atime);
+printf("the time of last access is %s\n",at); mt=ctime(&buf.st_mtime);
+printf("the modification time is :%s\n",mt); ct=ctime(&buf.st_ctime);
+printf("time of last change is : %s\n",ct); if((buf.st_mode&S_IRUSR)==S_IRUSR) printf("user has read permission\n"); if((buf.st_mode &S_IWUSR)==S_IWUSR) printf("user has write permisssion\n"); if((buf.st_mode &S_IXUSR)==S_IXUSR) printf("user has execute permission\n"); if((buf.st_mode & S_IRGRP)==S_IRGRP) printf("group has read permission\n"); if((buf.st_mode &S_IWGRP)==S_IWGRP) printf("group has write permission\n"); if((buf.st_mode & S_IXGRP)==S_IXGRP) printf("group has execute permission\n"); if((buf.st_mode &S_IROTH)==S_IROTH)
+printf("others has read permission\n"); if((buf.st_mode &S_IWOTH)==S_IWOTH) printf("others has write permission\n"); if((buf.st_mode &S_IXOTH)==S_IXOTH) printf("others has execute permisssion\n");
+}
